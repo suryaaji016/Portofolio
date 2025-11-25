@@ -175,7 +175,7 @@ function ProjectCard({ project, index }) {
               fill
               className="object-cover"
             />
-            
+
             {/* Subtle scanline effect on hover only */}
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-foreground/3 to-transparent animate-scan pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity"></div>
           </motion.div>

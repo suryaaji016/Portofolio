@@ -9,7 +9,7 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Portfolio - Your Name",
+  title: "Portfolio - Surya Pri Atmaji S",
   description:
     "Full Stack Developer Portfolio - React, Next.js, and modern web technologies",
   generator: "v0.app",
