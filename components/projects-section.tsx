@@ -142,7 +142,7 @@ export default function ProjectsSection() {
   );
 }
 
-function ProjectCard({ project, index }) {
+function ProjectCard({ project, index }: any) {
   const images = Array.isArray(project.image) ? project.image : [project.image];
   const [currentIndex, setCurrentIndex] = useState(0);
 
