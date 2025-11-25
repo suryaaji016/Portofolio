@@ -86,7 +86,7 @@ export default function HeroSection() {
             transition={{ delay: 0.9 }}
           >
             <motion.a
-              href="/porto.pdf"
+              href="/CV_Surya.pdf"
               download
               className="relative group px-8 py-4 bg-foreground text-background font-semibold rounded-lg overflow-hidden transition-all duration-300 hover:shadow-xl shadow-lg flex items-center gap-2"
               whileHover={{ scale: 1.05 }}
