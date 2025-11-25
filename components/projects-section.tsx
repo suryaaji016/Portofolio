@@ -54,7 +54,7 @@ export default function ProjectsSection() {
         "/projects/oncloud5.png",
       ],
       tags: ["Next.js", "Tailwind CSS", "DaisyUI", "MongoDB"],
-      link: "https://oncloudstore.vercel.app/",
+      link: "https://gc2-ooncloud.vercel.app/",
       github: "https://github.com/suryaaji016/on-cloud-ecommerce",
     },
     {
