@@ -1,101 +1,149 @@
 "use client";
 
-import {
-  FaGithub,
-  FaLinkedin,
-  FaTwitter,
-  FaEnvelope,
-  FaWhatsapp,
-} from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaEnvelope, FaWhatsapp } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-
   const socialLinks = [
     {
-      name: "Whatsapp",
-      icon: <FaWhatsapp />,
-      href: "https://wa.me/6281296232396",
-    },
-    {
-      name: "Github",
-      icon: <FaGithub />,
+      icon: <FaGithub className="text-xl" />,
       href: "https://github.com/suryaaji016",
+      label: "GitHub",
     },
     {
-      name: "LinkedIn",
-      icon: <FaLinkedin />,
-      href: "https://www.linkedin.com/in/surya-pri-atmaji-6781a7178/",
+      icon: <FaLinkedin className="text-xl" />,
+      href: "https://linkedin.com/in/suryaaji",
+      label: "LinkedIn",
     },
     {
-      name: "Email",
-      icon: <FaEnvelope />,
-      href: "mailto:suryaaji016@gmail.com",
+      icon: <FaEnvelope className="text-xl" />,
+      href: "mailto:suryapri@example.com",
+      label: "Email",
+    },
+    {
+      icon: <FaWhatsapp className="text-xl" />,
+      href: "https://wa.me/6281234567890",
+      label: "WhatsApp",
     },
   ];
 
   return (
     <footer
       id="contact"
-      className="bg-black text-white py-12 border-t border-white/10"
+      className="relative py-16 overflow-hidden bg-background border-t-2 border-border"
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+      {/* Animated top border */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-foreground to-transparent opacity-30"></div>
+
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
         <div className="grid md:grid-cols-3 gap-12 mb-12">
-          {/* Brand */}
-          <div>
-            <h3 className="text-xl font-bold mb-2">Surya Pri Atmaji S</h3>
-            <p className="text-white/70">Full Stack Developer</p>
-            <p className="text-white/70">West Java, Indonesia</p>
-          </div>
+          {/* Brand Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="space-y-4"
+          >
+            <h3 className="text-2xl font-bold bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
+              Surya Pri Atmaji S
+            </h3>
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              Full Stack Developer
+            </p>
+            <p className="text-muted-foreground text-sm">
+              West Java, Indonesia
+            </p>
+            <div className="flex items-center gap-2 text-sm">
+              <div className="w-2 h-2 bg-foreground rounded-full animate-pulse"></div>
+              <span className="text-foreground font-mono">
+                AVAILABLE FOR WORK
+              </span>
+            </div>
+          </motion.div>
 
           {/* Quick Links */}
-          <div>
-            <h4 className="font-bold mb-4">Quick Links</h4>
-            <div className="space-y-2">
-              <a
-                href="#about"
-                className="block text-white/70 hover:text-white transition-colors"
-              >
-                About
-              </a>
-              <a
-                href="#projects"
-                className="block text-white/70 hover:text-white transition-colors"
-              >
-                Projects
-              </a>
-              <a
-                href="#contact"
-                className="block text-white/70 hover:text-white transition-colors"
-              >
-                Contact
-              </a>
-            </div>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="space-y-4"
+          >
+            <h4 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+              <div className="w-1 h-6 bg-foreground"></div>
+              Quick Links
+            </h4>
+            <ul className="space-y-2">
+              {["About", "Projects", "Contact"].map((link, idx) => (
+                <motion.li key={link} whileHover={{ x: 5 }}>
+                  <a
+                    href={`#${link.toLowerCase()}`}
+                    className="text-muted-foreground hover:text-foreground transition-colors text-sm"
+                  >
+                    {link}
+                  </a>
+                </motion.li>
+              ))}
+            </ul>
+          </motion.div>
 
           {/* Social Links */}
-          <div>
-            <h4 className="font-bold mb-4">Follow Me</h4>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="space-y-4"
+          >
+            <h4 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+              <div className="w-1 h-6 bg-foreground"></div>
+              Follow Me
+            </h4>
             <div className="flex gap-4">
-              {socialLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
+              {socialLinks.map((social, idx) => (
+                <motion.a
+                  key={social.label}
+                  href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors text-lg"
-                  aria-label={link.name}
+                  className="w-12 h-12 flex items-center justify-center rounded-lg glass border-2 border-border hover:border-foreground hover:shadow-lg text-muted-foreground hover:text-foreground transition-all"
+                  whileHover={{ scale: 1.1, y: -5 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ opacity: 0, scale: 0 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1 + 0.3 }}
                 >
-                  {link.icon}
-                </a>
+                  {social.icon}
+                </motion.a>
               ))}
             </div>
-          </div>
+          </motion.div>
         </div>
 
-        <div className="border-t border-white/10 pt-8 text-center text-white/60 text-sm">
-          <p>&copy; {currentYear} Surya Pri Atmaji S. All rights reserved.</p>
-        </div>
+        {/* Bottom Bar */}
+        <motion.div
+          className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+        >
+          <p className="text-sm text-muted-foreground">
+            © 2025 Surya Pri Atmaji S.{" "}
+            <span className="text-foreground">All rights reserved.</span>
+          </p>
+          <p className="text-sm text-muted-foreground">
+            Built with{" "}
+            <span className="text-foreground font-semibold">Next.js</span>
+            {" & "}
+            <span className="text-foreground font-semibold">Framer Motion</span>
+          </p>
+        </motion.div>
+
+        {/* Animated corner borders */}
+        <div className="absolute top-8 left-8 w-16 h-16 border-l-2 border-t-2 border-foreground/20 animate-glow-pulse"></div>
+        <div className="absolute bottom-8 right-8 w-16 h-16 border-r-2 border-b-2 border-foreground/20 animate-glow-pulse"></div>
       </div>
     </footer>
   );

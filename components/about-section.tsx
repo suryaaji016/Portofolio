@@ -25,6 +25,7 @@ import {
   SiDaisyui,
 } from "react-icons/si";
 import { MdToken } from "react-icons/md";
+import { motion } from "framer-motion";
 
 export default function AboutSection() {
   const skills = [
@@ -50,6 +51,7 @@ export default function AboutSection() {
     { name: "JWT", icon: <MdToken className="text-2xl" /> },
     { name: "AI Integration", icon: <FaRobot className="text-2xl" /> },
   ];
+
   const experience = [
     {
       role: "Admin Staff",
@@ -80,58 +82,121 @@ export default function AboutSection() {
         "Developed the company profile website using HTML, CSS, and JavaScript to support marketing and branding initiatives, collaborating closely with internal teams.",
     },
   ];
+
   return (
-    <section id="about" className="py-20 bg-black">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <h2 className="text-4xl md:text-5xl font-bold text-white mb-16">
-          About Me
-        </h2>
-        <p className="text-white/70 mb-12  leading-relaxed">
-          Full-Stack JavaScript developer with hands-on experience building
-          modern, scalable web applications using React, Node.js, Express, and
-          PostgreSQL. Strong understanding of APIs, authentication, and
-          deployment workflows. I transitioned into IT after discovering how
-          technology can automate work and solve real business problems. My
-          previous experience in operations helped me develop precision,
-          problem-solving, and fast learning abilities, which now strengthen my
-          engineering approach. Passionate about creating impactful digital
-          products and continuously learning new tools to deliver high-quality
-          solutions.
-        </p>
+    <section
+      id="about"
+      className="py-20 relative overflow-hidden bg-background"
+    >
+      {/* Grid pattern */}
+      <div
+        className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, currentColor 1px, transparent 1px),
+            linear-gradient(to bottom, currentColor 1px, transparent 1px)
+          `,
+          backgroundSize: "40px 40px",
+        }}
+      ></div>
 
-        <div className="grid lg:grid-cols-2 gap-16">
-          {/* Skills */}
-          <div>
-            <h3 className="text-2xl font-bold text-white mb-8">Skills</h3>
-            <div className="grid grid-cols-2 gap-x-8 gap-y-6">
-              {skills.map((skill) => (
-                <div key={skill.name} className="flex flex-col gap-2">
-                  <div className="text-white/90">{skill.icon}</div>
-                  <div className="text-white/80 text-lg">{skill.name}</div>
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+        {/* Title */}
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+            <span className="bg-gradient-to-r from-foreground via-muted-foreground to-foreground bg-clip-text text-transparent">
+              About
+            </span>{" "}
+            <span className="bg-gradient-to-r from-muted-foreground to-foreground bg-clip-text text-transparent">
+              Me
+            </span>
+          </h2>
+        </motion.div>
+
+        {/* Skills Section */}
+        <div className="mb-20">
+          <motion.div
+            className="flex items-center gap-4 mb-8"
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <div className="w-1 h-8 bg-foreground"></div>
+            <h3 className="text-3xl font-bold text-foreground">Skills</h3>
+          </motion.div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {skills.map((skill, idx) => (
+              <motion.div
+                key={skill.name}
+                className="group p-6 rounded-lg glass border-2 border-border hover:border-foreground/70 hover:shadow-lg transition-all duration-300"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.05 }}
+                whileHover={{ y: -5 }}
+              >
+                <div className="flex flex-col items-center gap-3">
+                  <div className="text-foreground group-hover:text-muted-foreground transition-colors">
+                    {skill.icon}
+                  </div>
+                  <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors text-center">
+                    {skill.name}
+                  </span>
                 </div>
-              ))}
-            </div>
+              </motion.div>
+            ))}
           </div>
+        </div>
 
-          {/* Experience */}
-          <div>
-            <h3 className="text-2xl font-bold text-white mb-8">Experience</h3>
-            <div className="space-y-8">
-              {experience.map((exp, idx) => (
-                <div key={idx} className="bg-zinc-900 rounded-lg p-6">
-                  <h4 className="text-xl font-bold text-white mb-1">
-                    {exp.role}
+        {/* Experience Section */}
+        <div>
+          <motion.div
+            className="flex items-center gap-4 mb-8"
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <div className="w-1 h-8 bg-foreground"></div>
+            <h3 className="text-3xl font-bold text-foreground">Experience</h3>
+          </motion.div>
+
+          <div className="space-y-6">
+            {experience.map((job, idx) => (
+              <motion.div
+                key={idx}
+                className="group relative pl-8 pb-8 border-l-2 border-border hover:border-foreground/70 transition-all duration-300"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                whileHover={{ x: 10 }}
+              >
+                {/* Timeline dot */}
+                <div className="absolute -left-2 top-0 w-4 h-4 rounded-full bg-foreground border-2 border-background shadow-md"></div>
+
+                <div className="glass p-6 rounded-lg border-2 border-border group-hover:border-foreground/50 group-hover:shadow-lg transition-all">
+                  <h4 className="text-xl font-bold text-foreground mb-1">
+                    {job.role}
                   </h4>
-                  <p className="text-white/90 font-medium mb-1">
-                    {exp.company}
-                  </p>
-                  <p className="text-sm text-white/60 mb-3">{exp.period}</p>
-                  <p className="text-white/70 leading-relaxed">
-                    {exp.description}
+                  <div className="text-muted-foreground font-medium mb-2">
+                    {job.company}
+                  </div>
+                  <div className="text-sm text-muted-foreground mb-3 font-mono">
+                    {job.period}
+                  </div>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {job.description}
                   </p>
                 </div>
-              ))}
-            </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>

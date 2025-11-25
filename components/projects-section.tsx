@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 export default function ProjectsSection() {
   const projects = [
@@ -96,19 +97,44 @@ export default function ProjectsSection() {
   ];
 
   return (
-    <section id="projects" className="py-20 bg-black">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-          Featured Projects
-        </h2>
-        <p className="text-white/60 mb-16 max-w-2xl">
-          Here are some of my highlighted projects showcasing full-stack,
-          backend, and modern front-end development capabilities.
-        </p>
+    <section
+      id="projects"
+      className="py-20 relative overflow-hidden bg-background"
+    >
+      {/* Grid background */}
+      <div
+        className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, currentColor 1px, transparent 1px),
+            linear-gradient(to bottom, currentColor 1px, transparent 1px)
+          `,
+          backgroundSize: "40px 40px",
+        }}
+      ></div>
+
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+            <span className="bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
+              Featured Projects
+            </span>
+          </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Beberapa projek yang saya sorot, menampilkan kemampuan full-stack,
+            backend, dan pengembangan front-end modern.
+          </p>
+        </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, idx) => (
-            <ProjectCard key={idx} project={project} />
+            <ProjectCard key={idx} project={project} index={idx} />
           ))}
         </div>
       </div>
@@ -116,9 +142,8 @@ export default function ProjectsSection() {
   );
 }
 
-function ProjectCard({ project }: { project: any }) {
+function ProjectCard({ project, index }) {
   const images = Array.isArray(project.image) ? project.image : [project.image];
-
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -130,62 +155,93 @@ function ProjectCard({ project }: { project: any }) {
   }, [images]);
 
   return (
-    <Card className="group overflow-hidden bg-zinc-900 border-zinc-800 rounded-2xl shadow-sm hover:shadow-xl transition duration-300 flex flex-col">
-      {/* IMAGE */}
-      <div className="relative h-64 overflow-hidden">
-        <Image
-          src={images[currentIndex]}
-          alt={project.title}
-          fill
-          className="object-cover transition-all duration-700 group-hover:scale-110"
-        />
-      </div>
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+    >
+      <Card className="group relative overflow-hidden rounded-2xl border-2 border-border flex flex-col h-full glass hover:border-foreground/50 hover:shadow-xl transition-all duration-300">
+        {/* IMAGE with 3D transform */}
+        <div className="relative h-64 overflow-hidden bg-muted">
+          <motion.div
+            className="relative w-full h-full"
+            whileHover={{ scale: 1.02 }}
+            transition={{ duration: 0.3 }}
+          >
+            <Image
+              src={images[currentIndex]}
+              alt={project.title}
+              fill
+              className="object-cover"
+            />
+            
+            {/* Subtle scanline effect on hover only */}
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-foreground/3 to-transparent animate-scan pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          </motion.div>
 
-      {/* CONTENT */}
-      <div className="p-6 flex flex-col flex-grow">
-        <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
-
-        <p className="text-white/60 text-sm leading-relaxed mb-4">
-          {project.description}
-        </p>
-
-        {/* TAGS */}
-        <div className="flex flex-wrap gap-2 mb-6">
-          {project.tags.map((tag: any) => (
-            <span
-              key={tag}
-              className="bg-teal-900/30 text-teal-400 px-3 py-1 rounded-full text-xs font-medium"
-            >
-              {tag}
-            </span>
-          ))}
+          {/* Corner accents - more subtle */}
+          <div className="absolute top-2 left-2 w-6 h-6 border-t border-l border-foreground/20"></div>
+          <div className="absolute top-2 right-2 w-6 h-6 border-t border-r border-foreground/20"></div>
+          <div className="absolute bottom-2 left-2 w-6 h-6 border-b border-l border-foreground/20"></div>
+          <div className="absolute bottom-2 right-2 w-6 h-6 border-b border-r border-foreground/20"></div>
         </div>
 
-        {/* BUTTONS - Centered at bottom */}
-        <div className="flex items-center justify-center gap-4 mt-auto">
-          {project.github && (
-            <a
-              href={project.github}
-              target="_blank"
-              className="flex items-center gap-2 text-sm font-medium text-white/70 hover:text-white transition"
-            >
-              <FaGithub className="text-lg" />
-              Github
-            </a>
-          )}
+        {/* CONTENT */}
+        <div className="p-6 flex flex-col grow">
+          <motion.h3
+            className="text-xl font-bold text-foreground mb-2 group-hover:text-muted-foreground transition-colors"
+            whileHover={{ x: 5 }}
+          >
+            {project.title}
+          </motion.h3>
 
-          {project.link && (
-            <a
-              href={project.link}
-              target="_blank"
-              className="flex items-center gap-2 text-sm font-medium text-blue-400 hover:text-blue-300 transition"
-            >
-              <FaExternalLinkAlt className="text-sm" />
-              Live Demo
-            </a>
-          )}
+          <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-3">
+            {project.description}
+          </p>
+
+          {/* TAGS */}
+          <div className="flex flex-wrap gap-2 mb-6">
+            {project.tags.map((tag) => (
+              <span
+                key={tag}
+                className="px-3 py-1 rounded-full text-xs font-medium glass border-2 border-border text-foreground hover:border-foreground/70 hover:shadow-md transition-all"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          {/* BUTTONS - Centered at bottom */}
+          <div className="flex items-center justify-center gap-4 mt-auto">
+            {project.github && (
+              <motion.a
+                href={project.github}
+                target="_blank"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg glass border-2 border-border hover:border-foreground hover:shadow-md text-sm font-medium text-muted-foreground hover:text-foreground transition-all"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <FaGithub className="text-lg" />
+                <span>Github</span>
+              </motion.a>
+            )}
+
+            {project.link && (
+              <motion.a
+                href={project.link}
+                target="_blank"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-foreground text-background border-2 border-foreground hover:bg-muted-foreground hover:shadow-lg text-sm font-medium transition-all"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <FaExternalLinkAlt className="text-sm" />
+                <span>Live Demo</span>
+              </motion.a>
+            )}
+          </div>
         </div>
-      </div>
-    </Card>
+      </Card>
+    </motion.div>
   );
 }

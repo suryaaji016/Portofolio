@@ -5,10 +5,12 @@ import HeroSection from "@/components/hero-section";
 import AboutSection from "@/components/about-section";
 import ProjectsSection from "@/components/projects-section";
 import Footer from "@/components/footer";
+import AnimatedBackground from "@/components/animated-background";
 
 export default function Home() {
   return (
-    <main className="bg-black text-white">
+    <main className="relative min-h-screen">
+      <AnimatedBackground />
       <Header />
       <HeroSection />
       <AboutSection />
