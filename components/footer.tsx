@@ -12,17 +12,17 @@ export default function Footer() {
     },
     {
       icon: <FaLinkedin className="text-xl" />,
-      href: "https://linkedin.com/in/suryaaji",
+      href: "https://www.linkedin.com/in/surya-pri-atmaji-6781a7178/",
       label: "LinkedIn",
     },
     {
       icon: <FaEnvelope className="text-xl" />,
-      href: "mailto:suryapri@example.com",
+      href: "mailto:suryaaji016@gmail.com",
       label: "Email",
     },
     {
       icon: <FaWhatsapp className="text-xl" />,
-      href: "https://wa.me/6281234567890",
+      href: "https://wa.me/6281296232396",
       label: "WhatsApp",
     },
   ];

@@ -98,7 +98,7 @@ export default function HeroSection() {
             </motion.a>
 
             <motion.a
-              href="https://wa.me/6281234567890"
+              href="https://wa.me/6281296232396"
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-4 glass border-2 border-border hover:border-foreground text-foreground font-semibold rounded-lg transition-all duration-300 hover:bg-secondary hover:shadow-lg flex items-center gap-2"
