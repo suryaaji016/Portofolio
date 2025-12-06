@@ -55,15 +55,22 @@ export default function ProjectsSection() {
       ],
       tags: ["Next.js", "Tailwind CSS", "DaisyUI", "MongoDB"],
       link: "https://gc2-ooncloud.vercel.app/",
-      github: "https://github.com/suryaaji016/on-cloud-ecommerce",
+      github: "https://github.com/suryaaji016/Oncloud-clone",
     },
     {
       title: "LinkedIn-Themed Social Media App",
       description:
         "Full-stack social media platform with profiles, posts, reactions, comments, real-time updates, JWT auth, and Redis caching. Includes React Native mobile client.",
-      image: "/projects/linkedin.png",
+      image: [
+        "/projects/linkedin (1).png",
+        "/projects/linkedin (2).png",
+        "/projects/linkedin (3).png",
+        "/projects/linkedin (4).png",
+        "/projects/linkedin (5).png",
+        "/projects/linkedin (6).png",
+      ],
       tags: ["React Native", "Expo", "Express.js", "MongoDB", "Redis", "JWT"],
-      github: "https://github.com/H8-FSJS-P3S7/h8-fsjs-p3s7-gc01-suryaaji016",
+      github: "https://github.com/suryaaji016/Linkedin-clone",
     },
     {
       title: "Tic-Tac-Toe Realtime Multiplayer",
@@ -78,7 +85,7 @@ export default function ProjectsSection() {
         "Jest",
         "AWS",
       ],
-      github: "https://github.com/suryaaji016/tictactoe-realtime",
+      github: "https://github.com/suryaaji016/tic-tac-toe-client-side",
       link: "",
     },
     {
@@ -163,7 +170,7 @@ function ProjectCard({ project, index }: any) {
     >
       <Card className="group relative overflow-hidden rounded-2xl border-2 border-border flex flex-col h-full glass hover:border-foreground/50 hover:shadow-xl transition-all duration-300">
         {/* IMAGE with 3D transform */}
-        <div className="relative h-64 overflow-hidden bg-muted">
+        <div className="relative h-64 overflow-hidden bg-muted/30">
           <motion.div
             className="relative w-full h-full"
             whileHover={{ scale: 1.02 }}
@@ -173,7 +180,7 @@ function ProjectCard({ project, index }: any) {
               src={images[currentIndex]}
               alt={project.title}
               fill
-              className="object-cover"
+              className="object-contain"
             />
 
             {/* Subtle scanline effect on hover only */}
